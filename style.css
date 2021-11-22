@@ -1,0 +1,96 @@
+:root {
+    --bg-bright-color: #E0E9FB;
+    --bg-dark-color: #1446AA;
+    --fg-main-color: #2464E5;
+    --fg-bright-color: #5386EB;
+    --fg-dark-color: #020711;
+    --fg-error-color: #E52464;
+    background-color: var(--bg-bright-color);
+}
+
+header {
+    background-color: var(--bg-dark-color);
+    margin: Opx;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 100%;
+}
+
+input {
+    border-style: solid;
+    border-radius: 5px;
+}
+
+.bordered {
+    border-radius: 5px;
+    border-color: var(--fg-dark-color);
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.title {
+    grid-column: 2;
+}
+
+.text {
+    position: relative;
+    text-align: center;
+    color: var(--fg-dark-color);
+}
+
+.error {
+    color: var(--fg-error-color);
+}
+
+.form {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.btn {
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--fg-bright-color);
+    color: var(--fg-dark-color);
+    height: 6vh;
+    width: fit-content;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signbtn {
+    grid-column: 3;
+    align-self: center;
+}
+
+.headerbtn {
+    height: 8vh;
+    width: 7vw;
+    background-color: var(--fg-main-color);
+    color: var(--fg-dark-color);
+}
+
+.formbtnblock {
+    margin: 5px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+}
+
+.trip {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.driver {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}

@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+
+  app:
+    build: .
+    ports: 
+      - 3000:3000
+    restart: always
+
+  db:
+    image: mariadb
+    ports: 
+      - 3306:3306
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: admin
+      MARIADB_DATABASE: database
