@@ -5,11 +5,6 @@ const Connector = require("./connector")
 
 const app = express()
 
-
-await Connector.authenticate()
-    .then(() => console.log("Database connected"))
-    .catch((err) => ("Connection to database failed\nTrace: " + err))
-
 //Set the rendering engine for the web pages
 app.set("view engine", "pug")
 
@@ -30,11 +25,16 @@ app.use(session({
 }))
 
 //Register the routes of the app
-//const tripRouter = require("./routes/tripRoute")
+const indexRouter = require("./routes/indexRoute")
 
-//app.use("/trip", tripRouter)
+app.use("/", indexRouter)
 
-app.use("/style.css", (req, res) => res.sendFile(path.join(__dirname, "style.css")))
+//app.use("/style.css", (req, res) => res.sendFile(path.join(__dirname, "style.css")))
+
+app.use("/js/:res", (req, res) => res.sendFile(path.join(__dirname, "src/js", req.params.res)))
+app.use("/img/:res", (req, res) => res.sendFile(path.join(__dirname, "src/img", req.params.res)))
+app.use("/css/:res", (req, res) => res.sendFile(path.join(__dirname, "src/css", req.params.res)))
+
 
 //Open the server
 app.listen(3000, () => console.log("App started on port 3000"))
