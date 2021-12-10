@@ -1,22 +1,14 @@
 const express = require("express")
-const { Sequelize } = require("sequelize")
 const session = require("express-session")
 const path = require("path")
-
-//Open a connection to the database
-const Connector = new Sequelize('database', 'root', 'admin', {
-    host: 'localhost',
-    dialect: "mariadb"
-})
-
-//Authenticate to the database
-Connector.authenticate()
-    .then(() => console.log("Database connected"))
-    .catch((err) => ("Connection to database failed\nTrace: " + err))
-
-module.exports.Connector = Connector
+const Connector = require("./connector")
 
 const app = express()
+
+
+await Connector.authenticate()
+    .then(() => console.log("Database connected"))
+    .catch((err) => ("Connection to database failed\nTrace: " + err))
 
 //Set the rendering engine for the web pages
 app.set("view engine", "pug")

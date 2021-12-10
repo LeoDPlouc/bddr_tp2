@@ -1,15 +1,10 @@
 const { DataTypes } = require("sequelize")
-const { Connector } = require("../index")
+const Connector = require("../connector")
 
 const Creature = Connector.define("Creature", {
-    id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+    name: {
         unique: true,
         primaryKey: true,
-        autoIncrement: true
-    },
-    name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {

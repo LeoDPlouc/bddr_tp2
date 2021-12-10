@@ -1,33 +1,28 @@
 const { DataTypes } = require("sequelize")
-const { Connector } = require("../index")
+const Connector = require("../connector")
 
 const Creature = require("./creature")
 
 const Spell = Connector.define("Spell", {
-    id: {
-        type: DataTypes.INTEGER,
+    name: {
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         primaryKey: true,
-        autoIncrement: true
     },
-    wizard: {
-        type: DataTypes.BOOLEAN
+    levels: {
+        type: DataTypes.STRING
     },
-    level: {
-        type: DataTypes.INTEGER
-    },
-    component: {
+    components: {
         type: DataTypes.STRING
     },
     spell_resistance: {
         type: DataTypes.BOOLEAN
+    },
+    description: {
+        type: DataTypes.TEXT
     }
-
-})
-
-Creature.hasMany(Spell)
-Spell.hasMany(Creature)
+});
 
 Spell.sync({ alter: true }).catch((err) => console.error(err))
 
