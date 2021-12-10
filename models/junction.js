@@ -9,6 +9,6 @@ const Junction = Connector.define("Junction", {})
 Junction.belongsTo(Creature)
 Junction.belongsTo(Spell)
 
-Junction.sync({ alter: true }).catch((err) => console.error(err))
+Junction.sync().catch((err) => console.error(err))
 
 module.exports = Junction

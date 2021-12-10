@@ -15,6 +15,6 @@ const Creature = Connector.define("Creature", {
     }
 })
 
-Creature.sync({ alter: true }).catch((err) => console.error(err))
+Creature.sync().catch((err) => console.error(err))
 
 module.exports = Creature
