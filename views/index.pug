@@ -5,6 +5,21 @@ head
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
   title Search Creature
   link(rel='stylesheet', href='css/bootstrap.css')
+  style(type='text/css').
+    .table-borderless {
+      border: none;
+      color: white;
+    }
+    tr {
+      line-height: 0px;
+    }
+    td {
+      width: 10px;
+    }
+    div {
+      word-break: break-all;
+      word-wrap: break-word;
+    }
 section.container
   header.mt-3
   section#main-content 
@@ -14,51 +29,126 @@ section.container
           img(src='img/logo search.png')
           label.control-label.h3.mr-auto.ml-auto Filtrer la recherche
         .form-group.mb-4.p-4(style='background-color: rgb(7, 51, 71); border: solid rgb(7, 51, 71) 1px;')
-          form.form-horizontal(method='post', action='')
+          form.form-horizontal(method='post', action='/')
             .form-group.mb-3
-              label.control-label Spell Name
-              input#spell_name(type='text', placeholder='name' name="name")
+              table.table.table-borderless 
+                tr 
+                  td 
+                    label.control-label Spell Name
+                  td
+                    input#spell_name(type='text', placeholder='name', nmae='name')
+                tr 
+                  td 
+                    label.control-label Description
+                  td
+                    input#description(type='text', placeholder='explaination of spell', name='description')
+                tr 
+                  td
+                    label.control-label Level
+                  td
+                    input#level(type='number', min='0', max='9', placeholder='0...9', name='level')
             .form-group.mb-3
-              label.control-label Description
-              input#description(type='text', placeholder='explaination of spell')
+              span Classes:
+                table.table.table-borderless
+                  tr
+                    td
+                      input#alchemist(type='checkbox', name='alchemist')
+                      label.control-label(for='alchemist') Alchemist 
+                    td
+                      input#barbarian(type='checkbox', name='barbarian')
+                      label.control-label(for='barbarian') Barbarian 
+                    td
+                      input#bard(type='checkbox', name='bard')
+                      label.control-label(for='bard') Bard 
+                    td
+                      input#cleric(type='checkbox', name='cleric')
+                      label(for='cleric') Cleric 
+                  tr
+                    td
+                      input#druid(type='checkbox', name='druid')
+                      label(for='druid') Druid 
+                    td
+                      input#fighter(type='checkbox', name='fighter')
+                      label(for='fighter') Fighter 
+                    td
+                      input#fighter(type='checkbox', name='inquisitor')
+                      label(for='iqnquisitor') Inquisitor 
+                    td
+                      input#fighter(type='checkbox', name='kineticist')
+                      label(for='kineticist') Kineticist 
+                  tr 
+                    td
+                      input#fighter(type='checkbox', name='magus')
+                      label(for='magus') Magus 
+                    td
+                      input#fighter(type='checkbox', name='monk')
+                      label(for='monk') Monk 
+                    td
+                      input#fighter(type='checkbox', name='paladin')
+                      label(for='paladin') Paladin 
+                    td
+                      input#fighter(type='checkbox', name='ranger')
+                      label(for='ranger') Ranger 
+                  tr 
+                    td
+                      input#fighter(type='checkbox', name='rogue')
+                      label(for='rogue') Rogue 
+                    td
+                      input#fighter(type='checkbox', name='slayer')
+                      label(for='slayer') Slayer 
+                    td
+                      input#fighter(type='checkbox', name='sorcerer')
+                      label(for='sorcerer') Sorcerer 
+                    td
+                      input#fighter(type='checkbox', name='wizard')
+                      label(for='wizard') Wizard 
             .form-group.mb-3
-              label.control-label Level
-              input#level(type='number', min='0', max='9', placeholder='0...9')
+              span Spell resistance:
+                table.table.table-borderless(style={'width': '200px'})
+                  tr
+                    td
+                      input#V(type='checkbox', name='resistance_yes')
+                      label(for='resistance_yes') Yes
+                    td
+                      input#S(type='checkbox', name='resistance_no')
+                      label(for='resistance_no') No
             .form-group.mb-3
-              span Classes
-              br
-              input#alchemist(type='checkbox', name='alchemist')
-              label.control-label(for='alchemist') Alchemist
-              input#barbarian(type='checkbox', name='barbarian')
-              label.control-label(for='barbarian') Barbarian
-              input#bard(type='checkbox', name='bard')
-              label.control-label(for='bard') Bard
-              br
-              input#cleric(type='checkbox', name='cleric')
-              label(for='cleric') Cleric
-              input#druid(type='checkbox', name='druid')
-              label(for='druid') Druid
-              input#fighter(type='checkbox', name='fighter')
-              label(for='fighter') Fighter
-            .form-group.mb-3
-              span Components
-              br
-              input#V(type='checkbox', name='V')
-              label(for='V') V
-              input#S(type='checkbox', name='S')
-              label(for='S') S
-              input#M(type='checkbox', name='M')
-              label(for='M') M
-              input(id='V/M', type='checkbox', name='V/M')
-              label(for='V/M') V/M
+              span Components:
+                table.table.table-borderless(style={'width': '500px'})
+                  tr 
+                    td
+                      input#V(type='checkbox', name='V')
+                      label(for='V') V
+                    td
+                      input#S(type='checkbox', name='S')
+                      label(for='S') S
+                    td
+                      input#M(type='checkbox', name='M')
+                      label(for='M') M
+                    td
+                      input#M(type='checkbox', name='F')
+                      label(for='F') F
+                    td
+                      input(id='DF', type='checkbox', name='DF')
+                      label(for='DF') DF
             .btn-group
               button.btn.btn-success(type='submit') Search
               button.btn.btn-secondary(type='cancel') cancel
+        .form-group.mb-4.p-4(style='background-color: rgb(7, 51, 71); border: solid rgb(7, 51, 71) 1px;')
+          form.form-horizontal(method='post', action='/')
+            div(style={'font-weight': 'bold', 'text-decoration': 'underline'}) Spells
+            br
+            div Abadar's Truthtelling
+            div - classes: cleric, inquisitor, oracle, paladin, warpriest
+            div - levels: 1
+            div - components: V, S, DF
+            div - spell resistance: yes 
+            div - description: This spell functions identically to the spell zone of truth,except as noted above. The target momentarily takes on the semblance of a being of perfect order,like an archon or inevitable,so that all who can see the target know it is affected by the spell. This divine guise flickers over the target for only an instant and does not allow it to pass as a member of a different race.
   footer
     .text-right
       p
         img(src='img/logo uqac.png', style='width: 40px; height: 40px;')
-        | design by team uqac
-        | Alex, Thibault, Leo and Ikram
+        | design by team uqac |
+        | Alex, Ikram, Léo and Thibault
 script(src='js/jquery-3.4.1.min.js')
 script(src='js/bootstrap.js')
