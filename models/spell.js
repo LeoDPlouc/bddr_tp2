@@ -21,9 +21,12 @@ const Spell = Connector.define("Spell", {
     },
     description: {
         type: DataTypes.TEXT
+    },
+    classes: {
+        type: DataTypes.STRING
     }
 });
 
-Spell.sync({ alter: true }).catch((err) => console.error(err))
+Spell.sync().catch((err) => console.error(err))
 
 module.exports = Spell
