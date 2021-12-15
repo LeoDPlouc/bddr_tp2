@@ -2,6 +2,8 @@ const { query } = require("express")
 const { Op } = require("sequelize")
 
 const spell = require("../models/spell")
+const junction = require("../models/junction")
+const creature = require("../models/creature")
 
 module.exports.indexPost = async function (req, res, next) {
     var query = {}
@@ -13,14 +15,13 @@ module.exports.indexPost = async function (req, res, next) {
         query.description = { [Op.regexp]: req.body.description }
 
     if (req.body.level)
-        query.level = { [Op.regexp]: req.body.level }
+        query.level = Number(req.body.level)
 
     if (req.body.resistance_yes && !req.body.resistance_no)
         query.spell_resistance = true
 
     if (!req.body.resistance_yes && req.body.resistance_no)
         query.spell_resistance = false
-
 
 
     var componentRe = []
@@ -43,7 +44,7 @@ module.exports.indexPost = async function (req, res, next) {
     //alchemist barbarian bard cleric druid fighter inquisitor kineticist magus monk
     //paladin ranger rogue slayer sorcerer wizard
 
-    classRe = []
+    var classRe = []
 
     if (req.body.alchemist)
         classRe.push("alchemist")
@@ -78,17 +79,27 @@ module.exports.indexPost = async function (req, res, next) {
     if (req.body.wizard)
         classRe.push("wizard")
 
-    classeRe = classeRe.join("|")
-    if (classeRe)
-        query.classes = { [Op.regexp]: classeRe }
+    classRe = classRe.join("|")
+    if (classRe)
+        query.classes = { [Op.regexp]: classRe }
 
-    if (Object.keys(query).length) {
-        var spells = await spell.findAll({ where: query })
-        console.log(spells)
+    var spells = await spell.findAll({ where: query })
+    for (var i = 0; i < spells.length; i++) {
+        spells[i] = spells[i].dataValues
+        spells[i].creatures = []
+        var junctions = await junction.findAll({ where: { SpellName: spells[i].name } })
+        for (var j = 0; j < junctions.length; j++) {
+            var creatures = await creature.findAll({ where: { name: junctions[j].CreatureName } })
+            for (var k = 0; k < creatures.length; k++) {
+                spells[i].creatures.push(creatures[k].dataValues)
+            }
+        }
     }
 
-    console.log(req.body)
-    console.log(query)
+    res.render("index", spells)
+
+
+    console.log(spells[0])
 }
 
 module.exports.indexGet = function (req, res, next) {
