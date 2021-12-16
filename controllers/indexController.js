@@ -15,7 +15,7 @@ module.exports.indexPost = async function (req, res, next) {
         query.description = { [Op.regexp]: req.body.description }
 
     if (req.body.level)
-        query.level = Number(req.body.level)
+        query.levels = Number(req.body.level)
 
     if (req.body.resistance_yes && !req.body.resistance_no)
         query.spell_resistance = true
@@ -96,7 +96,7 @@ module.exports.indexPost = async function (req, res, next) {
         }
     }
 
-    res.render("index", spells)
+    res.render("index", {spells:spells})
 
 
     console.log(spells[0])

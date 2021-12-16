@@ -131,6 +131,13 @@ section.container
                     td
                       input(id='DF', type='checkbox', name='DF')
                       label(for='DF') DF
+            - function Display()
+                var list = {"name": "Abadar's Truthtelling", "classes": "cleric, inquisitor, oracle, paladin, warpriest", "levels": "1", "components": "V, S, DF", "spell resistance": "yes"}
+                each val, key in list
+                  if key == "name"
+                    div(style={'text-decoration': 'underline'})= val
+                  else
+                    li= key + ' : ' + val
             .btn-group
               button.btn.btn-success(type='submit') Search
               button.btn.btn-secondary(type='cancel') cancel
@@ -138,12 +145,21 @@ section.container
           form.form-horizontal(method='post', action='/')
             div(style={'font-weight': 'bold', 'text-decoration': 'underline'}) Spells
             br
-            div Abadar's Truthtelling
-            div - classes: cleric, inquisitor, oracle, paladin, warpriest
-            div - levels: 1
-            div - components: V, S, DF
-            div - spell resistance: yes 
-            div - description: This spell functions identically to the spell zone of truth,except as noted above. The target momentarily takes on the semblance of a being of perfect order,like an archon or inevitable,so that all who can see the target know it is affected by the spell. This divine guise flickers over the target for only an instant and does not allow it to pass as a member of a different race.
+            if spells
+              each val in spells 
+                div(style={'text-decoration': 'underline'})= val.name
+                li= "classes : " + val.classes
+                li= "levels : " + val.levels
+                li= "components : " + val.components 
+                li= "spell resistance : " + val.spell_resistance 
+                li= "description : " + val.description
+                if val.creatures != ""
+                  li= "creatures : "
+                  each crea in val.creatures
+                    span= " | " +crea.name
+                    br
+                br
+            br
   footer
     .text-right
       p
