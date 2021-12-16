@@ -12,6 +12,15 @@ const Creature = Connector.define("Creature", {
                 msg: "Name shouldn't be empty"
             }
         }
+    },
+    url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: "Name shouldn't be empty"
+            }
+        }
     }
 })
 
